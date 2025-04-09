@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Grupos Aleatorios</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Generador de Grupos Aleatorios</h1>
+
+        <div id="file-upload-container" class="form-group">
+            <label for="file-input">Selecciona un archivo CSV:</label>
+            <input type="file" id="file-input" accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+            <p id="file-upload-message"></p>
+        </div>
+
+        <div id="student-list-container">
+            <h2>Lista de Estudiantes</h2>
+            <table id="student-list-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Género</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="group-generation-container" class="form-group">
+            <label for="group-size">Tamaño del Grupo:</label>
+            <input type="number" id="group-size" value="3" min="2">
+            <button id="generate-groups-button" disabled>Generar Grupos</button>
+        </div>
+
+        <div id="groups-container">
+            <h2>Grupos Generados</h2>
+            <div id="groups"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+</body>
+</html>
