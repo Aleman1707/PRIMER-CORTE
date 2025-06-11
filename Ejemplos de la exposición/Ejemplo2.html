@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejemplo JS Básico</title>
+</head>
+<body>
+  <h1 id="titulo">Hola</h1>
+  <button id="btnSaludo">Mostrar saludo</button>
+  <button id="btnUsuario">Cargar usuario</button>
+  <p id="info"></p>
+
+  <script>
+    //Objetos y acceso a propiedades y métodos
+    const usuario = {
+      nombre: "Laura",
+      edad: 22,
+      saludar: function() {
+        return "Hola, soy " + this.nombre;
+      }
+    };
+
+    // Acceso a propiedades
+    console.log(usuario.nombre); // Laura
+    console.log(usuario.saludar()); // Hola, soy Laura
+
+    //Manipulación del DOM y eventos
+    const titulo = document.getElementById("titulo");
+    const btnSaludo = document.getElementById("btnSaludo");
+    const btnUsuario = document.getElementById("btnUsuario");
+    const info = document.getElementById("info");
+
+    btnSaludo.addEventListener("click", function() {
+      titulo.textContent = usuario.saludar(); // Manipular contenido del DOM
+    });
+
+    //Asincronía con callback ---
+    function obtenerDatos(callback) {
+      setTimeout(function() {
+        const datos = { curso: "JavaScript", nivel: "Básico" };
+        callback(datos);
+      }, 1000);
+    }
+
+    //Asincronía con promesa básica
+    function obtenerUsuario() {
+      return new Promise(function(resolve, reject) {
+        setTimeout(function() {
+          const exito = true;
+          if (exito) {
+            resolve({ nombre: "Carlos", edad: 30 });
+          } else {
+            reject("Error al cargar usuario");
+          }
+        }, 1500);
+      });
+    }
+
+    btnUsuario.addEventListener("click", function () {
+      info.textContent = "Cargando usuario...";
+
+      obtenerDatos(function(datos) {
+        console.log("Datos del curso:", datos);
+      });
+
+      obtenerUsuario()
+        .then(function(usuario) {
+          info.textContent = "Usuario: " + usuario.nombre + ", Edad: " + usuario.edad;
+        })
+        .catch(function(error) {
+          info.textContent = error;
+        });
+    });
+  </script>
+</body>
+</html>
